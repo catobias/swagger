@@ -1,0 +1,81 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "LoadResource",
+        "description": "An API that loads data into a dashDB database.",
+        "termsOfService": "http://urltotermsofservice.com",
+        "contact": {
+            "name": "IBM Support",
+            "url": "http://www.ibm.com/support",
+            "email": "support@ibm.com"
+        },
+        "license": {
+            "name": "IBM",
+            "url": "http://www.ibm.com"
+        }
+    },
+    "host": "swagger.io",
+    "basePath": "/dashdb-api",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/load/{tableName}": {
+            "post": {
+                "description": "Loads data from a single .csv formatted input file.",
+                "operationId": "loadCsvFile",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "loadFile",
+                        "in": "formData",
+                        "description": "Input file to load.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tableName",
+                        "in": "path",
+                        "description": "The name of the dashDB table in which to load the data.",
+                        "required": true,
+                        "type": "string",
+                        "format": "byte"
+                    },
+                    {
+                        "name": "hasHeaderRow",
+                        "in": "query",
+                        "description": "True if the .csv input file contains a row one column header, false otherwise.",
+                        "required": true,
+                        "type": "string",
+                        "format": "byte"
+                    },
+                    {
+                        "name": "delimiter",
+                        "in": "query",
+                        "description": "column delimiter of .csv file.",
+                        "required": false,
+                        "type": "string",
+                        "format": "byte"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        }
+    }
+}
